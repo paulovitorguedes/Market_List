@@ -1,0 +1,16 @@
+header {
+    background: lightseagreen;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+h1 {
+    padding-top: 10px;
+}
+
+.btn-group {
+    display: block;
+    text-align: left;
+    padding-left: 5px;
+}
+
