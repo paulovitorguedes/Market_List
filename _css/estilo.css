@@ -14,3 +14,11 @@ h1 {
     padding-left: 5px;
 }
 
+.group {
+    text-transform: uppercase;
+    text-align: center;
+    border: 1px solid lightseagreen;
+    margin-top: 5px;
+    padding: 0;
+}
+
