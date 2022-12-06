@@ -1,5 +1,7 @@
 var lista_itens = Array();
-var valor = '';
+var lista_container = Array();
+var valor_htm = '';
+var countgrupo = 1;
 
 function adicionarGrupo() {
     var grupo = document.getElementById("name").value.toUpperCase().trim();
@@ -8,20 +10,51 @@ function adicionarGrupo() {
     for (let i = 0; i < lista_itens.length; i++) {
         if (lista_itens[i] == grupo) {
             achou = true;
-        } 
+        }
     }
     if (achou) {
         alert("valor existe");
     } else {
         if (grupo != "") {
-            valor += "<div id='container1'><div id='namegroup1' class='group'><span id='spangroup1'>" + grupo + "</span></div><p id='itens1'></p><div class='form-inline'><input type='text' id='proxitem1' class='form-control mt-1' placeholder='Próximo Item'><a href='#' onclick='adicionarItens(" + "1" + ")'><i class='fa-solid fa-circle-up fa-lg ml-2'></i></a></div></div>";
-
-            document.getElementById('section').innerHTML = valor;
-            document.getElementById("name").value = "";
+            valor_htm = "<div id='container" + countgrupo + "'><div id='namegroup" + countgrupo + "'class='group'><span id='spangroup" + countgrupo + "'>" + grupo + "</span></div><p id='itens" + countgrupo + "'></p><div class='form-inline'><input type='text' id='proxitem" + countgrupo + "' class='form-control mt-1' placeholder='Próximo Item'><a href='#' onclick='adicionarItens(" + countgrupo + ")'><i class='fa-solid fa-circle-up fa-lg ml-2'></i></a></div></div>";
+            countgrupo++;
 
             lista_itens.push(grupo);
+            lista_container.push(valor_htm);
+
+            document.getElementById('section').innerHTML += valor_htm;
+            document.getElementById("name").value = "";
+
+
         }
     }
+}
+
+function removerGrupo() {
+    var grupo = document.getElementById("name").value.toUpperCase().trim();
+    var t = '';
+    var achou = false;
+    if (grupo != "") {
+        for (let i = 0; i < lista_container.length; i++) {
+            if (lista_container[i].toString().search(">" + grupo + "<") >= 0) {
+                lista_container.splice(i, 1);
+                achou = true;
+                break;
+            }
+        }
+        if (achou) {
+            for (let i = 0; i < lista_container.length; i++) {
+                t += lista_container[i];
+            }
+            document.getElementById('section').innerHTML = t;
+            document.getElementById("name").value = "";
+        } else {
+            alert("valor não existe");
+        }
+    } else {
+        alert("valor não existe");
+    }
+
 }
 
 function adicionarItens(id) {
