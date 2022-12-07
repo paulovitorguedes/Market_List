@@ -25,29 +25,37 @@
 
     <header>
         <h1>Minha Lista</h1>
-        <!-- Input text para nome do usuário -->
+        <!-- Input text para adicionar ou remover grupo -->
         <div class="form-group">
             <input class="form-control" type="text" id="name" placeholder="Digite o nome do grupo">
         </div>
+        <!-- botoes para adicionar ou remover grupo -->
         <div class="btn-group">
             <a href="#" class="btn btn-dark" onclick="adicionarGrupo()">Adicionar Grupo</a>
             <a href="#" class="btn btn-dark" onclick="removerGrupo()">Remover Grupo</a>
         </div>
-        
     </header>
 
     <section id="section">
         <!-- <div id="container1">
             <div id="namegroup1" class="group">
                 <span id="spangroup1">carnes</span>
+                <span id="spanum1" class="apaga">1</span>
             </div>
-            <p id="itens1"></p>
+            <p id="itens1">
+                <ol id="olitens1">
+                    <li>
+                        FRANGO
+                        <a href='#' onclick='riscarItens("FRANGO")'><i class='fa-solid fa-check fa-lg ml-2'></i></a>
+                        <a href='#' onclick='apagarItens("FRANGO")'><i class='fa-solid fa-trash ml-2'></i></a>
+                    </li>
+                </ol>
+            </p>
             <div class="form-inline">
                 <input type="text" id="proxitem1" class="form-control mt-1" placeholder="Próximo Item">
                 <a href="#" onclick="adicionarItens('1')"><i class="fa-solid fa-circle-up fa-lg ml-2"></i></a>
             </div>
         </div> -->
-        
     </section>
 
 
