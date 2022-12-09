@@ -26,7 +26,11 @@ section{
     padding: 10px;
 }
 
-/* .apaga{
+.apaga{
     display: none;
-} */
+}
+
+.risca-item{
+    text-decoration: line-through;
+}
 

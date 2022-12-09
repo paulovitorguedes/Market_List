@@ -128,11 +128,15 @@ function removerGrupo() {
 // Adiciona itens com numeração do indice do grupo como parâmetros 
 function adicionarItens(id) {
 
-    console.log("Adicionar Itens para: " + lista_grupo[id]);
 
+    // recebe o valor digitado para adicionar itens
     var nameitem = document.getElementById("proxitem" + id).value.toUpperCase().trim();
 
+    //Verifica se o valor digitado for diferente de vazio
     if (nameitem != "") {
+        console.log("Adicionar Iten " + nameitem + " para: " + lista_grupo[id]);
+        // verifica se o array lista_container_itens já teve informações inseridas e se essas informações sejam diferentes de vazia.
+        // se existir informações no array, adiciona um item concatenando com a anterior
         if (lista_container_itens.length > id && (lista_container_itens[id] != "" || lista_container_itens[id] != undefined)) {
             lista_container_itens[id] += '<li>' + nameitem + '<a href=' + '"#"' + 'onclick=' + "'riscarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-check fa-lg ml-2"></i></a><a href="#"' + 'onclick=' + "'apagarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-trash ml-2"></i></a></li>';
 
@@ -151,32 +155,73 @@ function adicionarItens(id) {
 
 
 
-function apagarItens(grupo, id) {
-    console.log("Apagar Item: " + grupo + " no indice: " + id);
+function apagarItens(item, id) {
+    console.log("Apagar Item: " + item + " no indice: " + id);
 
     var item_split = Array();
 
+    // (valor) recebe toda a lista referente ao grupo representado pelo id
     var valor = lista_container_itens[id];
+
+    // cada item sera adicionado em um indice do array item_split
     item_split = valor.split("</li>");
 
-
+    // Procura o item em cada indice 
+    // Exclui o indice encontrado no array
     for (let i = 0; i < item_split.length; i++) {
-        if (item_split[i].search(">" + grupo + "<") >= 0) {
+        if (item_split[i].search(">" + item + "<") >= 0) {
             item_split.splice(i, 1);
+
+            // o split cria o ultimo indice como vazio, o comando abaixo deleta esse indice
             item_split.splice(item_split.length - 1, 1);
-            console.log("deletou indece :" + i);
+            console.log("Remover Item: " + item);
         }
     }
 
+    // Remonta a String com todos os elementos do grupo 
     valor = "";
     for (let i = 0; i < item_split.length; i++) {
         valor += item_split[i] + "</li>";
     }
     lista_container_itens[id] = valor;
     document.getElementById("olitens" + id).innerHTML = valor;
+}
 
-    
 
-    
 
+
+function riscarItens(item, id) {
+    var item_split = Array();
+
+    // (valor) recebe toda a lista referente ao grupo representado pelo id
+    var valor = lista_container_itens[id];
+
+    // cada item sera adicionado em um indice do array item_split
+    item_split = valor.split("</li>");
+
+    // Procura o item em cada indice 
+    // Altera o indice encontrado no array onde a tag <li> recebe a classe risca
+    for (let i = 0; i < item_split.length; i++) {
+        if (item_split[i].search(">" + item + "<") >= 0) {
+            
+            if (item_split[i].search("risca-item") < 0) {
+                item_split[i] = '<li class="risca-item" >' + item + '<a href=' + '"#"' + 'onclick=' + "'riscarItens(" + '"' + item + '",' + id + ")'" + '><i class="fa-solid fa-check fa-lg ml-2"></i></a><a href="#"' + 'onclick=' + "'apagarItens(" + '"' + item + '",' + id + ")'" + '><i class="fa-solid fa-trash ml-2"></i></a>';
+
+                console.log("Riscou item: " + item);
+
+            } else {
+                item_split[i] = '<li>' + item + '<a href=' + '"#"' + 'onclick=' + "'riscarItens(" + '"' + item + '",' + id + ")'" + '><i class="fa-solid fa-check fa-lg ml-2"></i></a><a href="#"' + 'onclick=' + "'apagarItens(" + '"' + item + '",' + id + ")'" + '><i class="fa-solid fa-trash ml-2"></i></a>';
+
+                console.log("Retornou item: " + item);
+            }
+        }
+    }
+
+    // Remonta a String com todos os elementos do grupo 
+    valor = "";
+    for (let i = 0; i < item_split.length; i++) {
+        valor += item_split[i] + "</li>";
+    }
+    lista_container_itens[id] = valor;
+    document.getElementById("olitens" + id).innerHTML = valor;
 }
