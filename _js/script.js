@@ -134,10 +134,10 @@ function adicionarItens(id) {
 
     if (nameitem != "") {
         if (lista_container_itens.length > id && (lista_container_itens[id] != "" || lista_container_itens[id] != undefined)) {
-            lista_container_itens[id] += "<li>" + nameitem + "<a href='#' onclick='riscarItens(" + nameitem + ")'><i class='fa-solid fa-check fa-lg ml-2'></i></a><a href='#' onclick='apagarItens(" + nameitem + ")'><i class='fa-solid fa-trash ml-2'></i></a></li>";
+            lista_container_itens[id] += '<li>' + nameitem + '<a href=' + '"#"' + 'onclick=' + "'riscarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-check fa-lg ml-2"></i></a><a href="#"' + 'onclick=' + "'apagarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-trash ml-2"></i></a></li>';
 
         } else {
-            lista_container_itens[id] = "<li>" + nameitem + "<a href='#' onclick='riscarItens(" + nameitem + ")'><i class='fa-solid fa-check fa-lg ml-2'></i></a><a href='#' onclick='apagarItens(" + nameitem + ")'><i class='fa-solid fa-trash ml-2'></i></a></li>";
+            lista_container_itens[id] = '<li>' + nameitem + '<a href=' + '"#"' + 'onclick=' + "'riscarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-check fa-lg ml-2"></i></a><a href="#"' + 'onclick=' + "'apagarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-trash ml-2"></i></a></li>';
         }
     } else {
         alert("O campo não foi preenchdo corretamente");
@@ -145,5 +145,38 @@ function adicionarItens(id) {
 
     document.getElementById("olitens" + id).innerHTML = lista_container_itens[id];
     document.getElementById("proxitem" + id).value = "";
+
+}
+
+
+
+
+function apagarItens(grupo, id) {
+    console.log("Apagar Item: " + grupo + " no indice: " + id);
+
+    var item_split = Array();
+
+    var valor = lista_container_itens[id];
+    item_split = valor.split("</li>");
+
+
+    for (let i = 0; i < item_split.length; i++) {
+        if (item_split[i].search(">" + grupo + "<") >= 0) {
+            item_split.splice(i, 1);
+            item_split.splice(item_split.length - 1, 1);
+            console.log("deletou indece :" + i);
+        }
+    }
+
+    valor = "";
+    for (let i = 0; i < item_split.length; i++) {
+        valor += item_split[i] + "</li>";
+    }
+    lista_container_itens[id] = valor;
+    document.getElementById("olitens" + id).innerHTML = valor;
+
+    
+
+    
 
 }
