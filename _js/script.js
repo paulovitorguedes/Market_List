@@ -3,7 +3,7 @@
 // lista_container_iten: contem os elementos HTML para criação dos itens em seus respectivos grupos
 
 // Cada grupo criado receberá um indice no array (1º grupo = recebe 0, 2º grupo recebe 1 ...), esse indice será o mesmo das nomenclaturas dos ids HTML
-// Na remoção de um grupo, o indice receberá vazio, não sendo apagado para não perder a sequencia de numeação da criação dos grupos
+// Na remoção de um grupo, o indice receberá vazio, não sendo apagado para não perder a sequencia de numeração da criação dos grupos
 
 var lista_grupo = Array();
 var lista_container_grupo = Array();
@@ -14,6 +14,7 @@ var countgrupo = 0;
 
 //console.log(document.getElementById(lista_container_itens[-1]));
 
+// Função para adição de grupos
 function adicionarGrupo() {
     console.log("Adicionar Grupo");
     // recupera o nome do grupo no input 
@@ -60,7 +61,7 @@ function adicionarGrupo() {
 
 
 
-
+// Função para remoção de grupos
 function removerGrupo() {
     console.log("Remover Grupo");
     var t = "";
@@ -154,7 +155,7 @@ function adicionarItens(id) {
 
 
 
-
+//Função para remoção de itens
 function apagarItens(item, id) {
     console.log("Apagar Item: " + item + " no indice: " + id);
 
@@ -189,7 +190,7 @@ function apagarItens(item, id) {
 
 
 
-
+// Função para riscar itens
 function riscarItens(item, id) {
     var item_split = Array();
 
