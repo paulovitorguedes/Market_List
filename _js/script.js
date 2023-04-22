@@ -31,19 +31,19 @@ function adicionarGrupo() {
 
     // se o valor digitado foi encontrado no array, exibe um alert com valor existe
     if (achou) {
-        alert("valor existe");
+        alert("Grupo já encontra-se na lista");
 
     } else {
         // se não existir o valor digitado no array, verifica se o campo está vazio
         if (grupo != "") {
             console.log("Valor Adicionado: " + grupo);
             // se o valor digitado for válido
-            // variável valor_htm vai receber os elementos e atributos HTML para a criação do contrner do grupo inserido
-            // Cada id de cada elementos vai receber seu valor finalizado com uma numeração para indicação do grupo
-            // O grupo será inserido no elementos span com o id spangroup + contador
+            // variável valor_htm vai receber os elementos e atributos HTML para a criação do contener do grupo inserido
+            // Cada id de cada elemento vai receber seu valor finalizado com uma numeração para indicação do grupo
+            // O grupo será inserido no elemento span com o id spangroup + contador
             valor_htm = "<div id='container" + countgrupo + "'><div id='namegroup" + countgrupo + "'class='group'><span id='spangroup" + countgrupo + "'>" + grupo + "</span><span id='spanum" + countgrupo + "' class='apaga'>" + countgrupo + "</span></div><p id='itens" + countgrupo + "'><ol id='olitens" + countgrupo + "'></ol></p><div class='form-inline'><input type='text' id='proxitem" + countgrupo + "' class='form-control mt-1' placeholder='Próximo Item'><a href='#' onclick='adicionarItens(" + countgrupo + ")'><i class='fa-solid fa-circle-up fa-lg ml-2'></i></a></div></div>";
 
-            // o countgrupo é uma variavel global e contantemente sendo complementado
+            // o countgrupo é uma variavel sendo complementada (+1)  em cada grupo criado
             countgrupo++;
 
 
@@ -53,7 +53,10 @@ function adicionarGrupo() {
             // adiciona a string com os elementos e atributos HTML no array
             lista_container_grupo.push(valor_htm);
 
+            //Adiciono as tags a atributos HTML à section
             document.getElementById('section').innerHTML += valor_htm;
+
+            // Apaga o valor digitado no campo para adição de grupos
             document.getElementById("name").value = "";
         }
     }
@@ -91,7 +94,7 @@ function removerGrupo() {
             if (lista_container_itens[num_grupo] == "" || lista_container_itens[num_grupo] == undefined) {
                 console.log("Grupo sem itens - iniciar remoção");
 
-
+                //od indices referente ao grupo acionado recebe o valor vazio
                 lista_container_grupo[num_grupo] = "";
                 lista_grupo[num_grupo] = "";
 
@@ -192,19 +195,18 @@ function apagarItens(item, id) {
 
 // Função para riscar itens
 function riscarItens(item, id) {
-    var item_split = Array();
 
     // (valor) recebe toda a lista referente ao grupo representado pelo id
     var valor = lista_container_itens[id];
 
-    // cada item sera adicionado em um indice do array item_split
-    item_split = valor.split("</li>");
+    // cada item será adicionado em um indice do array item_split
+    var item_split = valor.split("</li>");
 
     // Procura o item em cada indice 
     // Altera o indice encontrado no array onde a tag <li> recebe a classe risca
     for (let i = 0; i < item_split.length; i++) {
         if (item_split[i].search(">" + item + "<") >= 0) {
-            
+            //Verifica se já existe a classe (risca-item). Se não existe entçao será adicionado, caso exita, será removida
             if (item_split[i].search("risca-item") < 0) {
                 item_split[i] = '<li class="risca-item" >' + item + '<a href=' + '"#"' + 'onclick=' + "'riscarItens(" + '"' + item + '",' + id + ")'" + '><i class="fa-solid fa-check fa-lg ml-2"></i></a><a href="#"' + 'onclick=' + "'apagarItens(" + '"' + item + '",' + id + ")'" + '><i class="fa-solid fa-trash ml-2"></i></a>';
 
@@ -221,7 +223,9 @@ function riscarItens(item, id) {
     // Remonta a String com todos os elementos do grupo 
     valor = "";
     for (let i = 0; i < item_split.length; i++) {
-        valor += item_split[i] + "</li>";
+        if(item_split[i] != ""){
+            valor += item_split[i] + "</li>";
+        }
     }
     lista_container_itens[id] = valor;
     document.getElementById("olitens" + id).innerHTML = valor;
