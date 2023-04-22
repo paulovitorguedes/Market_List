@@ -138,13 +138,24 @@ function adicionarItens(id) {
 
     //Verifica se o valor digitado for diferente de vazio
     if (nameitem != "") {
-        console.log("Adicionar Iten " + nameitem + " para: " + lista_grupo[id]);
+        
+        // if (lista_container_itens[id].search(">" + nameitem + "<")) {
+            
+        // }
+        
         // verifica se o array lista_container_itens já teve informações inseridas e se essas informações sejam diferentes de vazia.
         // se existir informações no array, adiciona um item concatenando com a anterior
         if (lista_container_itens.length > id && (lista_container_itens[id] != "" || lista_container_itens[id] != undefined)) {
+            if (lista_container_itens[id].search(">" + nameitem + "<") >= 0) {
+                console.log("O item já encontra-se no grupo selecionado");
+                alert("O item já encontra-se no grupo selecionado");
+                return false;
+            }
             lista_container_itens[id] += '<li>' + nameitem + '<a href=' + '"#"' + 'onclick=' + "'riscarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-check fa-lg ml-2"></i></a><a href="#"' + 'onclick=' + "'apagarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-trash ml-2"></i></a></li>';
+            console.log("Adicionar Iten " + nameitem + " para: " + lista_grupo[id]);
 
         } else {
+            console.log("Adicionar Iten " + nameitem + " para: " + lista_grupo[id]);
             lista_container_itens[id] = '<li>' + nameitem + '<a href=' + '"#"' + 'onclick=' + "'riscarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-check fa-lg ml-2"></i></a><a href="#"' + 'onclick=' + "'apagarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-trash ml-2"></i></a></li>';
         }
     } else {
@@ -223,7 +234,7 @@ function riscarItens(item, id) {
     // Remonta a String com todos os elementos do grupo 
     valor = "";
     for (let i = 0; i < item_split.length; i++) {
-        if(item_split[i] != ""){
+        if (item_split[i] != "") {
             valor += item_split[i] + "</li>";
         }
     }
