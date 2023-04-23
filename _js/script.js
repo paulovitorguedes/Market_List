@@ -136,15 +136,15 @@ function adicionarItens(id) {
     // recebe o valor digitado para adicionar itens
     var nameitem = document.getElementById("proxitem" + id).value.toUpperCase().trim();
 
-    //Verifica se o valor digitado for diferente de vazio
-    if (nameitem != "") {
-        
-        // if (lista_container_itens[id].search(">" + nameitem + "<")) {
-            
-        // }
-        
+    //verifica se o campo foi preenchido corretamente
+    //Caso esteja vazio, apresenta um alert solicitando o correto preenchimento 
+    if (nameitem == "") {
+        alert("Preencha corretamente o campo para adição de iten")
+        return false;
+
+    } else {
         // verifica se o array lista_container_itens já teve informações inseridas e se essas informações sejam diferentes de vazia.
-        // se existir informações no array, adiciona um item concatenando com a anterior
+        // se existir informações anteriores no array, adiciona um item concatenando com a anterior
         if (lista_container_itens.length > id && (lista_container_itens[id] != "" || lista_container_itens[id] != undefined)) {
             if (lista_container_itens[id].search(">" + nameitem + "<") >= 0) {
                 console.log("O item já encontra-se no grupo selecionado");
@@ -158,11 +158,11 @@ function adicionarItens(id) {
             console.log("Adicionar Iten " + nameitem + " para: " + lista_grupo[id]);
             lista_container_itens[id] = '<li>' + nameitem + '<a href=' + '"#"' + 'onclick=' + "'riscarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-check fa-lg ml-2"></i></a><a href="#"' + 'onclick=' + "'apagarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-trash ml-2"></i></a></li>';
         }
-    } else {
-        alert("O campo não foi preenchdo corretamente");
     }
 
+    //Remonta os itens do grupo
     document.getElementById("olitens" + id).innerHTML = lista_container_itens[id];
+    //Após inserir o item à lista, apaga o campo text para entrada do próximo item.
     document.getElementById("proxitem" + id).value = "";
 
 }
