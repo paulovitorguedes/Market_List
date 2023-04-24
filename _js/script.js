@@ -58,6 +58,9 @@ function adicionarGrupo() {
 
             // Apaga o valor digitado no campo para adição de grupos
             document.getElementById("name").value = "";
+        
+        } else {
+            alert("Preencha corretamente o campo para adição de grupos");
         }
     }
 }
@@ -139,7 +142,7 @@ function adicionarItens(id) {
     //verifica se o campo foi preenchido corretamente
     //Caso esteja vazio, apresenta um alert solicitando o correto preenchimento 
     if (nameitem == "") {
-        alert("Preencha corretamente o campo para adição de iten")
+        alert("Preencha corretamente o campo para adição de iten");
         return false;
 
     } else {
