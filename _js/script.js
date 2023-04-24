@@ -31,7 +31,7 @@ function adicionarGrupo() {
 
     // se o valor digitado foi encontrado no array, exibe um alert com valor existe
     if (achou) {
-        alert("Grupo já encontra-se na lista");
+        alert(`O grupo ${grupo} informado já encontra-se cadastraso na lista. Informe um grupo diferente`);
 
     } else {
         // se não existir o valor digitado no array, verifica se o campo está vazio
@@ -119,13 +119,13 @@ function removerGrupo() {
                 }
 
             } else {
-                alert("Grupo não pode ser removido, pois contém itens");
+                alert("Um grupo somente poderá ser removido caso não contenha itens");
             }
         } else {
-            alert("Valor não existe");
+            alert(`Nome de grupo: ${grupo} não encontrado na lita, revise o nome digitado`);
         }
     } else {
-        alert("O campo não foi preenchdo corretamente");
+        alert("Preencha corretamente o campo para remoção do grupo");
     }
 
 }
@@ -151,7 +151,7 @@ function adicionarItens(id) {
         if (lista_container_itens.length > id && (lista_container_itens[id] != "" || lista_container_itens[id] != undefined)) {
             if (lista_container_itens[id].search(">" + nameitem + "<") >= 0) {
                 console.log("O item já encontra-se no grupo selecionado");
-                alert("O item já encontra-se no grupo selecionado");
+                alert("Este item já encontra-se no grupo selecionado, informe um novo item");
                 return false;
             }
             lista_container_itens[id] += '<li>' + nameitem + '<a href=' + '"#"' + 'onclick=' + "'riscarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-check fa-lg ml-2"></i></a><a href="#"' + 'onclick=' + "'apagarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-trash ml-2"></i></a></li>';
