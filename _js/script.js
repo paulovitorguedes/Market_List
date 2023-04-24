@@ -12,7 +12,6 @@ var valor_htm = "";
 var item_html = "";
 var countgrupo = 0;
 
-//console.log(document.getElementById(lista_container_itens[-1]));
 
 // Função para adição de grupos
 function adicionarGrupo() {
@@ -151,7 +150,8 @@ function adicionarItens(id) {
         if (lista_container_itens.length > id && (lista_container_itens[id] != "" || lista_container_itens[id] != undefined)) {
             if (lista_container_itens[id].search(">" + nameitem + "<") >= 0) {
                 console.log("O item já encontra-se no grupo selecionado");
-                alert("Este item já encontra-se no grupo selecionado, informe um novo item");
+                alert(`O item: ${nameitem} já encontra-se no grupo selecionado, informe um novo item`);
+                document.getElementById("proxitem" + id).value = "";
                 return false;
             }
             lista_container_itens[id] += '<li>' + nameitem + '<a href=' + '"#"' + 'onclick=' + "'riscarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-check fa-lg ml-2"></i></a><a href="#"' + 'onclick=' + "'apagarItens(" + '"' + nameitem + '",' + id + ")'" + '><i class="fa-solid fa-trash ml-2"></i></a></li>';
