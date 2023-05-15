@@ -91,7 +91,7 @@ function removerGrupo() {
         }
 
         // verifica se existe itens inseridos no grupo no qual será removido
-        //caso exista algum item, a remoção será negada
+        //Se algum item for encontrado no grupo, a remoção desse grupo será nagada
         if (achou) {
             if (lista_container_itens[num_grupo] == "" || lista_container_itens[num_grupo] == undefined) {
                 console.log("Grupo sem itens - iniciar remoção");
